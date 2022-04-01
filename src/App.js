@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import MovieSearch from './pages/MovieSearch';
+import MovieWeek from './pages/MovieWeek';
+import { Error404 } from './pages/Error';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movie-week" element={<MovieWeek />} />
+          <Route path="/movie-search" element={<MovieSearch />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 

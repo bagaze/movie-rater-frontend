@@ -1,0 +1,15 @@
+.movie-card {
+    height: 300px;
+    width: 260px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.movie-card .movie-title {
+    font-weight: bold;
+}
+
+.movie-card .release-date {
+    font-style: italic;
+}
