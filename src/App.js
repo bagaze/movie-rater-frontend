@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import MovieSearch from './pages/MovieSearch';
 import MovieWeek from './pages/MovieWeek';
+import MovieDetail from './pages/MovieDetail';
 import { Error404 } from './pages/Error';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movie-week" element={<MovieWeek />} />
           <Route path="/movie-search" element={<MovieSearch />} />
+          <Route path="/movie/:tmdbid" element={<MovieDetail />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       <Footer />
