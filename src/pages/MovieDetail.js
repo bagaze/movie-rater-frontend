@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ErrorInfo from "../components/ErrorInfo";
 import { getTMDBData } from "../utils/tmdb_api";
+import MoviePoster from "../components/MoviePoster";
 
 function MovieDetail() {
     const [ movie, setMovie ] = useState(undefined);
@@ -64,9 +65,10 @@ function MovieDetail() {
             {!movie && !error && <p>Loading</p>}
             { movie && (
                 <div>
-                    <img
-                        src={`${TMDB_POSTER_PATH}${TMDB_POSTER_SIZE}${movie.poster_path}`}
-                        alt={`poster ${movie.title}`}
+                    <MoviePoster
+                        poster_path={movie.poster_path}
+                        size={TMDB_POSTER_SIZE}
+                        movie_title={movie.title}
                     /><br />
                     <span>Title: {movie.title}</span><br />
                     <span>Director(s): {directors.join(', ') || "TBD"}</span><br />
