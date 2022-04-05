@@ -5,7 +5,8 @@ export async function getTMDBData(
     customQueryParams,
     setData,
     setError,
-    setErrorInfo) {
+    setErrorInfo,
+    current_page=0) {
     const TMDB_API_URL = process.env.REACT_APP_TMDB_API_URL;
     const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
     const headers = {
@@ -16,6 +17,9 @@ export async function getTMDBData(
         region: "FR",
         ...customQueryParams
     };
+    if (current_page) {
+        params["page"] = current_page + 1;
+    }
 
     try {
         const { status, statusText, data } = await axios.get(
@@ -26,11 +30,17 @@ export async function getTMDBData(
             }
         );
         if (status === 200) {
-            if (data.results) {
-                setData(data.results);
-            } else {
-                setData(data);
-            }
+            setData((previousData) => {
+                if (current_page && previousData && data.results) {
+                    return {
+                        page: data.page,
+                        results: [...(previousData.results), ...(data.results)],
+                        total_pages: data.total_pages,
+                        total_results: data.total_results
+                    };
+                }
+                return data;
+            });
         } else {
             setError(true);
             setErrorInfo(`${status}: ${statusText}`);

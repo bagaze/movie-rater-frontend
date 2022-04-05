@@ -1,21 +1,30 @@
 form {
     text-align: center;
-    margin: 20px;
+    margin: 15px 500px;
 }
 
 .form__field {
     font-family: inherit;
     width: 100%;
-    border: 0;
-    border-bottom: 4px solid gray;
+    border: 3px solid gray;
+    box-shadow: 4px 2px 2px rgba(1, 1, 1, 0.250);
+    border-radius: 20px;
     outline: 0;
     font-size: 1.3rem;
     color: black;
-    padding: 7px 0;
+    padding: 7px 15px;
     background: transparent;
     transition: border-color 0.2s;
 }
 
 .form__field::placeholder {
     color: grey;
+}
+
+.form__field:hover {
+    box-shadow: 4px 2px 2px rgba(1, 1, 1, 0.500);
+}
+
+.form__field:focus {
+    box-shadow: 4px 2px 2px rgba(1, 1, 1, 0.500);
 }

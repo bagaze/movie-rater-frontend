@@ -12,25 +12,41 @@ function MovieWeek() {
 
     useEffect( () => {
         const customQueryParams = {
-            "release_date.gte": "2022-03-29",
-            "release_date.lte": "2022-04-05",
+            "release_date.gte": "2022-03-01",
+            "release_date.lte": "2022-04-11",
             "with_release_type": "3"
-        }
+        };
 
         getTMDBData("/discover/movie", customQueryParams, setMovies, setError, setErrorInfo);
     }, []);
 
+    const handleLoadMore = () => {
+        const customQueryParams = {
+            "release_date.gte": "2022-03-01",
+            "release_date.lte": "2022-04-11",
+            "with_release_type": "3"
+        };
+        getTMDBData("/discover/movie", customQueryParams, setMovies, setError, setErrorInfo, movies.page);
+    }
+
     if (error) {
-        return <ErrorInfo errorInfo={errorInfo} />
+        return <ErrorInfo errorInfo={errorInfo} />;
     }
 
     return (
         <main>
             <h1>Movies by weeks</h1>
             {!movies && <p>Loading</p>}
-            {movies && <MovieCards movies={movies} />}
+            {movies.results && (
+                <MovieCards movies={movies.results} />
+            )}
+            {movies.results && movies.results.length < movies.total_results && (
+                <div>
+                    <button onClick={handleLoadMore}>Load more results</button>
+                </div>
+            )}
         </main>
-    )
+    );
 };
 
 export default MovieWeek;
