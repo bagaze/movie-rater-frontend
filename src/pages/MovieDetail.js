@@ -12,6 +12,7 @@ function MovieDetail() {
     const [ movie, setMovie ] = useState(undefined);
     const [ error, setError ] = useState(false);
     const [ errorInfo, setErrorInfo ] = useState("");
+    const [ userRating, setUserRating ] = useState(0);
     let ratingTMDB = 0;
 
     const { tmdbid } = useParams();
@@ -82,10 +83,15 @@ function MovieDetail() {
                     />
                     {/* TMDB Rating */}
                     <Rating
-                        title="TMDB Rating"
+                        title="TMDB rating"
                         rating={ratingTMDB}
                     />
                     {/* TODO: User Rating */}
+                    <Rating
+                        title="User rating"
+                        rating={userRating}
+                        isClickable={true}
+                    />
                 </>
             ) }
         </MainLayout>

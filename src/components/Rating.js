@@ -1,15 +1,54 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 function Rating({title, rating, isClickable=false}) {
+    const [ hoveredStar, setHoveredStar ] = useState(0);
+    const [ userSelectedRating, setUserSelectedRating ] = useState(0);
     const maxRating = 5;
 
+    const handleMouseOver = ( (i) => {
+        if (isClickable) {
+            setHoveredStar(i);
+        }
+    } );
+
+    const handleClick = ( (i) => {
+        if (isClickable) {
+            setUserSelectedRating(i);
+        }
+    } );
+
+    let rating_
+    if (hoveredStar) {
+        rating_ = hoveredStar;
+    } else if (userSelectedRating) {
+        rating_ = userSelectedRating;
+    } else {
+        rating_ = rating;
+    }
     let ratingStars = [];
-    for (let i=0; i<maxRating; i++) {
-        if (i < rating) {
-            ratingStars.push(<FontAwesomeIcon icon={faStar} style={{color: "gold"}}/>);
+    for (let i=1; i<maxRating + 1; i++) {
+        if (i <= rating_) {
+            ratingStars.push(
+                <FontAwesomeIcon 
+                    onClick={ () => handleClick(i) }
+                    onMouseOver={ () => handleMouseOver(i) }
+                    onMouseLeave={ () => setHoveredStar(0) }
+                    icon={faStar} 
+                    style={{color: "gold"}}
+                />
+            );
         } else {
-            ratingStars.push(<FontAwesomeIcon icon={faStar} style={{color: "gray"}}/>);
+            ratingStars.push(
+                <FontAwesomeIcon
+                    onClick={ () => handleClick(i) }
+                    onMouseOver={ () => handleMouseOver(i) }
+                    onMouseLeave={ () => setHoveredStar(0) }
+                    icon={faStar}
+                    style={{color: "gray"}}
+                />
+            );
         }
     }
 
