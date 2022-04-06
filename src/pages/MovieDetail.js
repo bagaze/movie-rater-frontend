@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ErrorInfo from "../components/ErrorInfo";
 import { getTMDBData } from "../utils/tmdb_api";
-import MoviePoster from "../components/MoviePoster";
 import MainLayout from "../components/MainLayout";
 import Rating from "../components/Rating";
+import MovieDetailContent from "../components/MovieDetailContent";
 
 function MovieDetail() {
     const pageTitle = "Movie detail";
@@ -13,8 +13,6 @@ function MovieDetail() {
     const [ error, setError ] = useState(false);
     const [ errorInfo, setErrorInfo ] = useState("");
     let ratingTMDB = 0;
-
-    const TMDB_POSTER_SIZE = process.env.REACT_APP_TMDB_POSTER_SIZE_LARGE;
 
     const { tmdbid } = useParams();
 
@@ -51,6 +49,8 @@ function MovieDetail() {
                 } );
             }
         });
+
+        // Calculate TMDB rating on a scale of 5
         ratingTMDB = Math.round(movie.vote_average / 2); 
     }
 
@@ -74,22 +74,18 @@ function MovieDetail() {
         <MainLayout pageTitle={pageTitle}>
             { movie && (
                 <>
-                    <div>
-                        <h2>Informations</h2>
-                        <MoviePoster
-                            poster_path={movie.poster_path}
-                            size={TMDB_POSTER_SIZE}
-                            movie_title={movie.title}
-                        /><br />
-                        <span>ID: {movie.id}</span><br />
-                        <span>Title: {movie.title}</span><br />
-                        <span>Director(s): {directors.join(', ') || "TBD"}</span><br />
-                        <span>Release date: {releaseDateFR || "TDB"}</span>
-                    </div>
+                    {/* Movie information */}
+                    <MovieDetailContent
+                        movie={movie}
+                        directors={directors}
+                        releaseDateFR={releaseDateFR}
+                    />
+                    {/* TMDB Rating */}
                     <Rating
-                        title="Rating TMDB"
+                        title="TMDB Rating"
                         rating={ratingTMDB}
                     />
+                    {/* TODO: User Rating */}
                 </>
             ) }
         </MainLayout>

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-function Rating({title, rating}) {
+function Rating({title, rating, isClickable=false}) {
     const maxRating = 5;
 
     let ratingStars = [];
@@ -15,7 +15,7 @@ function Rating({title, rating}) {
 
     return (
         <div>
-            <h2>Rating TMDB</h2>
+            <h2>{title}</h2>
             <div>
                 {ratingStars}
             </div>
