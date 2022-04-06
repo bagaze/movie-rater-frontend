@@ -1,32 +1,27 @@
-import { useState } from "react";
-
 import poster_not_found from "../assets/poster_not_found.png";
 
 function MoviePoster( { poster_path, size, movie_title } ) {
-    const [ loaded, setLoaded ] = useState(false);
-
     const TMDB_POSTER_PATH = process.env.REACT_APP_TMDB_POSTER_PATH;
-    const src = `${TMDB_POSTER_PATH}${size}${poster_path}`;
+    const src = poster_path ? `${TMDB_POSTER_PATH}${size}${poster_path}` : poster_not_found;
 
-    const displayNoneStyle = {
-        display: "none"
-    };
-    const posterNotFoundStyle = {
+    const style = {
         width: parseInt(size.substring(1)),
         height: "auto"
     };
 
+    const handleError = (e) => {
+        if (e.target.src !== poster_not_found) {
+            e.target.onerror = null;
+            e.target.src = poster_not_found
+        }
+    }
+
     return (
         <>
             <img
-                style={loaded ? {} : displayNoneStyle}
+                style={style}
                 src={src}
-                onLoad={ () => setLoaded(true)}
-                alt={movie_title}
-            />
-            <img
-                style={loaded ? displayNoneStyle : posterNotFoundStyle}
-                src={poster_not_found}
+                onError={handleError}
                 alt={movie_title}
             />
         </>
