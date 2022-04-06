@@ -1,8 +1,10 @@
+import MainLayout from "../components/MainLayout"
+
 export function Error404() {
+    const pageTitle = "Not found"
     return (
-        <main>
-            <h1>Not found</h1>
+        <MainLayout pageTitle={pageTitle}>
             <p>The page you are trying to reach does not exist</p>
-        </main>
-    )
+        </MainLayout>
+    );
 };

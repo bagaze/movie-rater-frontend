@@ -5,11 +5,14 @@ import { DateTime } from "luxon";
 
 import MovieCards from "../components/MovieCards";
 import ErrorInfo from "../components/ErrorInfo";
+import MainLayout from "../components/MainLayout";
 
 import { getTMDBData } from "../utils/tmdb_api";
 import { getPreviousWednesday, getNextTuesday, getPreviousWeek, getNextWeek } from "../utils/date_utils";
 
 function MovieWeek() {
+    const pageTitle = "Movies by weeks";
+
     const [ movies, setMovies ] = useState([]);
     const [ error, setError ] = useState(false);
     const [ errorInfo, setErrorInfo ] = useState("");
@@ -63,12 +66,23 @@ function MovieWeek() {
     }
 
     if (error) {
-        return <ErrorInfo errorInfo={errorInfo} />;
+        return (
+            <MainLayout pageTitle={pageTitle}>
+                <ErrorInfo errorInfo={errorInfo} />
+            </MainLayout>
+        );
+    }
+
+    if (!movies) {
+        return (
+            <MainLayout pageTitle={pageTitle}>
+                <p>Loading...</p>
+            </MainLayout>
+        )
     }
 
     return (
-        <main>
-            <h1>Movies by weeks</h1>
+        <MainLayout pageTitle={pageTitle}>
             {weekDay && (
                 <div>
                     <Link to={`/movie-week?week=${getPreviousWeek(weekDay)}`}>Previous week</Link>
@@ -77,7 +91,6 @@ function MovieWeek() {
                 </div>
             )}
             {weekDay && <h2>{`Week of ${weekDay}`}</h2>}
-            {!movies && <p>Loading</p>}
             {movies.results && (
                 <MovieCards movies={movies.results} />
             )}
@@ -86,7 +99,7 @@ function MovieWeek() {
                     <button onClick={handleLoadMore}>Load more results</button>
                 </div>
             )}
-        </main>
+        </MainLayout>
     );
 };
 

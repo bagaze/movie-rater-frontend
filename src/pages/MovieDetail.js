@@ -3,13 +3,15 @@ import { useParams } from "react-router-dom";
 import ErrorInfo from "../components/ErrorInfo";
 import { getTMDBData } from "../utils/tmdb_api";
 import MoviePoster from "../components/MoviePoster";
+import MainLayout from "../components/MainLayout";
 
 function MovieDetail() {
+    const pageTitle = "Movie detail";
+
     const [ movie, setMovie ] = useState(undefined);
     const [ error, setError ] = useState(false);
     const [ errorInfo, setErrorInfo ] = useState("");
 
-    const TMDB_POSTER_PATH = process.env.REACT_APP_TMDB_POSTER_PATH;
     const TMDB_POSTER_SIZE = process.env.REACT_APP_TMDB_POSTER_SIZE_LARGE;
 
     const { tmdbid } = useParams();
@@ -54,15 +56,24 @@ function MovieDetail() {
     }
 
     if (error) {
-        return <ErrorInfo errorInfo={errorInfo} />
+        return (
+            <MainLayout pageTitle={pageTitle}>
+                <ErrorInfo errorInfo={errorInfo} />
+            </MainLayout>
+        );
+    }
+
+    if (!movie && !error) {
+        return (
+            <MainLayout pageTitle={pageTitle}>
+                <p>Loading...</p>
+            </MainLayout>
+        );
     }
     
     return (
-    <main>
-        <h1>Movie detail</h1>
-        <div>
+        <MainLayout pageTitle={pageTitle}>
             <p>Movie detail of {tmdbid}</p>
-            {!movie && !error && <p>Loading</p>}
             { movie && (
                 <div>
                     <MoviePoster
@@ -75,8 +86,8 @@ function MovieDetail() {
                     <span>Release date: {releaseDateFR || "TDB"}</span>
                 </div>
             ) }
-        </div>
-    </main>);
+        </MainLayout>
+    );
 };
 
 export default MovieDetail;

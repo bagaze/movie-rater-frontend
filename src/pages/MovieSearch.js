@@ -5,10 +5,13 @@ import "../styles/MovieSearch.css"
 import ErrorInfo from "../components/ErrorInfo";
 import MovieCards from "../components/MovieCards";
 import MovieSearchForm from "../components/MovieSearchForm";
+import MainLayout from "../components/MainLayout";
 import { useStateWithSessionStorage } from "../utils/hooks";
 import { getTMDBData } from "../utils/tmdb_api";
 
 function MovieSearch() {
+    const pageTitle = "Search movies";
+
     const [ searchField, setSearchField ] = useStateWithSessionStorage(
         "moviesearch__searchField",
         ""
@@ -70,35 +73,32 @@ function MovieSearch() {
 
     if (error) {
         return (
-            <main>
-                <h1>Search movies</h1>
+            <MainLayout pageTitle={pageTitle}>
                 <MovieSearchForm
                     onChange={handleChange}
                     onSubmit={handleOnSubmit}
                     value={searchField}
                 />
                 <ErrorInfo errorInfo={errorInfo} />
-            </main>
+            </MainLayout>
         )
     }
 
     if (movies && movies.total_results === 0) {
         return (
-            <main>
-                <h1>Search movies</h1>
+            <MainLayout pageTitle={pageTitle}>
                 <MovieSearchForm
                     onChange={handleChange}
                     onSubmit={handleOnSubmit}
                     value={searchField}
                 />
                 <p>No movies found for title={lastSearchedField}</p>
-            </main>
+            </MainLayout>
         )
     }
 
     return (
-        <main>
-            <h1>Search movies</h1>
+        <MainLayout pageTitle={pageTitle}>
             <MovieSearchForm
                 onChange={handleChange}
                 onSubmit={handleOnSubmit}
@@ -110,7 +110,7 @@ function MovieSearch() {
                     <button onClick={handleLoadMore}>Load more results</button>
                 </div>
             )}
-        </main>
+        </MainLayout>
     )
 }
 

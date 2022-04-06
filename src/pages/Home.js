@@ -1,10 +1,12 @@
+import MainLayout from "../components/MainLayout";
+
 function Home() {
+    const pageTitle = "Home";
     return (
-        <main>
-            <h1>Home</h1>
+        <MainLayout pageTitle={pageTitle}>
             <p>Welcome on Movie Rater!</p>
-        </main>
-    )
+        </MainLayout>
+    );
 }
 
 export default Home;
