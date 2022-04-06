@@ -8,8 +8,6 @@ function MoviePoster( { poster_path, size, movie_title } ) {
     const TMDB_POSTER_PATH = process.env.REACT_APP_TMDB_POSTER_PATH;
     const src = `${TMDB_POSTER_PATH}${size}${poster_path}`;
 
-    console.log(`size: ${size}`)
-
     const displayNoneStyle = {
         display: "none"
     };

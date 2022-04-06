@@ -40,8 +40,6 @@ function MovieWeek() {
             const gteDate = weekDay;
             const lteDate = getNextTuesday(weekDay);
 
-            console.log(`gteDate: ${gteDate} - lteDate:${lteDate}`);
-
             const customQueryParams = {
                 "release_date.gte": gteDate,
                 "release_date.lte": lteDate,
