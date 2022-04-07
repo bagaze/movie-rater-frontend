@@ -12,3 +12,46 @@ main {
 h1 {
   padding: 20px;
 }
+
+a:link {
+  text-decoration: none;
+  color: steelblue;
+}
+
+a:visited {
+  text-decoration: none;
+  color: steelblue;
+}
+
+a:hover {
+  text-decoration: none;
+  color: rgb(40, 100, 150);
+}
+
+a:active {
+  text-decoration: none;
+  color: rgb(40, 100, 150);
+}
+
+a.button-link {
+  background-color:dodgerblue;
+  border-radius:5px;
+  color:#fff;
+  margin-bottom: 10px;
+  margin-right: 30px;
+  padding:10px;
+  box-sizing: border-box;
+}
+
+a.button-link:hover{
+  background-color:rgb(25, 130, 230);
+}
+
+button {
+  background-color: dodgerblue;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+}

@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import "../styles/MovieSearch.css"
-
 import ErrorInfo from "../components/ErrorInfo";
 import MovieCards from "../components/MovieCards";
 import MovieSearchForm from "../components/MovieSearchForm";
@@ -31,8 +29,15 @@ function MovieSearch() {
         setSearchField(e.target.value);
     };
 
+    const handleClear = (e) => {
+        setMovies([]);
+        setSearchField('');
+        setLastSearchedField('');
+    }
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
+        setMovies([]);
 
         setLastSearchedField(e.target.form_field.value);
         if (searchField) {
@@ -51,7 +56,7 @@ function MovieSearch() {
     }
 
     const handleLoadMore = () => {
-        console.log(lastSearchedField);
+        console.log('handleLoadMore');
         const customQueryParams = {
             query: lastSearchedField
         };
@@ -60,14 +65,14 @@ function MovieSearch() {
 
     if (!lastSearchedField) {
         return (
-            <main>
-                <h1>Search movies</h1>
+            <MainLayout pageTitle={pageTitle}>
                 <MovieSearchForm
-                    onChange={handleChange}
-                    onSubmit={handleOnSubmit}
                     value={searchField}
+                    onSubmit={handleOnSubmit}
+                    onChange={handleChange}
+                    onClear={handleClear}
                 />
-            </main>
+            </MainLayout>
         )
     }
 
@@ -75,9 +80,10 @@ function MovieSearch() {
         return (
             <MainLayout pageTitle={pageTitle}>
                 <MovieSearchForm
-                    onChange={handleChange}
-                    onSubmit={handleOnSubmit}
                     value={searchField}
+                    onSubmit={handleOnSubmit}
+                    onChange={handleChange}
+                    onClear={handleClear}
                 />
                 <ErrorInfo errorInfo={errorInfo} />
             </MainLayout>
@@ -88,26 +94,31 @@ function MovieSearch() {
         return (
             <MainLayout pageTitle={pageTitle}>
                 <MovieSearchForm
-                    onChange={handleChange}
-                    onSubmit={handleOnSubmit}
                     value={searchField}
+                    onSubmit={handleOnSubmit}
+                    onChange={handleChange}
+                    onClear={handleClear}
                 />
                 <p>No movies found for title={lastSearchedField}</p>
             </MainLayout>
         )
     }
 
+    console.log(movies);
+    console.log(movies.results && movies.results.length < movies.total_results);
+
     return (
         <MainLayout pageTitle={pageTitle}>
             <MovieSearchForm
-                onChange={handleChange}
-                onSubmit={handleOnSubmit}
                 value={searchField}
+                onSubmit={handleOnSubmit}
+                onChange={handleChange}
+                onClear={handleClear}
             />
             {movies && <MovieCards movies={movies.results} />}
             {movies.results && movies.results.length < movies.total_results && (
                 <div>
-                    <button onClick={handleLoadMore}>Load more results</button>
+                    <button type="button" onClick={handleLoadMore}>Load more results</button>
                 </div>
             )}
         </MainLayout>

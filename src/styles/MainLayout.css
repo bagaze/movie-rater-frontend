@@ -1,0 +1,8 @@
+main {
+    font-family: 'Helvetica Neue', 'Arial';
+}
+
+.main-content {
+    border-top: 3px solid black;
+    padding-top: 15px;
+}

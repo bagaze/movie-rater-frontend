@@ -8,7 +8,6 @@ function Copyright() {
           Movie Rater
         </a>{' '}
         {new Date().getFullYear()}
-        {'.'}
       </div>
     );
   }

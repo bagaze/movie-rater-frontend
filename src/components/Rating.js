@@ -53,7 +53,7 @@ function Rating({title, rating, isClickable=false}) {
     }
 
     return (
-        <div>
+        <div style={{margin: "20 0"}}>
             <h2>{title}</h2>
             <div>
                 {ratingStars}

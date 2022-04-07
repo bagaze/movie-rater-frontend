@@ -1,7 +1,7 @@
 .movie-card {
     height: 300px;
     width: 260px;
-    padding: 20px;
+    padding: 20px 10px;
     background-color: rgba(0, 0, 0, 0.05);
     text-align: center;
 }
@@ -16,4 +16,10 @@
 
 .movie-card .release-date {
     font-style: italic;
+}
+
+.div-link {
+    height: 300px;
+    width: 260px;
+    padding: 20px 10px;
 }

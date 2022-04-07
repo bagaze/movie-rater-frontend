@@ -6,7 +6,7 @@ function MovieCard({ movie }) {
     const TMDB_POSTER_SIZE = process.env.REACT_APP_TMDB_POSTER_SIZE_SMALL;
 
     return (
-        <Link to={`/movie/${movie.id}`}>
+        <Link className="div-link" to={`/movie/${movie.id}`}>
             <div key={movie.id} className="movie-card">
                 <MoviePoster
                     poster_path={movie.poster_path}

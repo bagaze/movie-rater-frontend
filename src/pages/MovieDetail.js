@@ -5,6 +5,7 @@ import { getTMDBData } from "../utils/tmdb_api";
 import MainLayout from "../components/MainLayout";
 import Rating from "../components/Rating";
 import MovieDetailContent from "../components/MovieDetailContent";
+import "../styles/MovieDetail.css";
 
 function MovieDetail() {
     const pageTitle = "Movie detail";
@@ -74,7 +75,7 @@ function MovieDetail() {
     return (
         <MainLayout pageTitle={pageTitle}>
             { movie && (
-                <>
+                <div className="movie-detail">
                     {/* Movie information */}
                     <MovieDetailContent
                         movie={movie}
@@ -92,7 +93,7 @@ function MovieDetail() {
                         rating={userRating}
                         isClickable={true}
                     />
-                </>
+                </div>
             ) }
         </MainLayout>
     );

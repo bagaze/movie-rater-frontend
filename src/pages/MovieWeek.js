@@ -9,6 +9,7 @@ import MainLayout from "../components/MainLayout";
 
 import { getTMDBData } from "../utils/tmdb_api";
 import { getPreviousWednesday, getNextTuesday, getPreviousWeek, getNextWeek } from "../utils/date_utils";
+import PrevNextLinks from "../components/PrevNextLinks";
 
 function MovieWeek() {
     const pageTitle = "Movies by weeks";
@@ -82,11 +83,7 @@ function MovieWeek() {
     return (
         <MainLayout pageTitle={pageTitle}>
             {weekDay && (
-                <div>
-                    <Link to={`/movie-week?week=${getPreviousWeek(weekDay)}`}>Previous week</Link>
-                    {" "}
-                    <Link to={`/movie-week?week=${getNextWeek(weekDay)}`}>Next week</Link>
-                </div>
+                <PrevNextLinks weekDay={weekDay} />
             )}
             {weekDay && <h2>{`Week of ${weekDay}`}</h2>}
             {movies.results && (
