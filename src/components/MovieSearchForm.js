@@ -1,6 +1,11 @@
-function MovieSearchForm({ value, onSubmit, onChange }) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
+import "../styles/MovieSearchForm.css"
+
+function MovieSearchForm({ value, onSubmit, onChange, onClear }) {
     return (
-        <form onSubmit={onSubmit}>
+        <form id="search_form" onSubmit={onSubmit}>
             <input
                 id="form_field"
                 className="form__field"
@@ -9,6 +14,15 @@ function MovieSearchForm({ value, onSubmit, onChange }) {
                 value={value}
                 onChange={onChange}
             />
+            <button 
+                type="button"
+                className="clear_button"
+                onClick={onClear}>
+                    <FontAwesomeIcon
+                        size="xl"
+                        icon={faXmark}
+                    />
+            </button>
         </form>
     )
 }
