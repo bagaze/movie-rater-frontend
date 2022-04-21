@@ -8,7 +8,7 @@ form {
 .form__field {
     font-family: inherit;
     width: 100%;
-    border: 3px solid gray;
+    border: 3px solid darkslategray;
     box-shadow: 4px 2px 2px rgba(1, 1, 1, 0.250);
     border-radius: 20px;
     outline: 0;
