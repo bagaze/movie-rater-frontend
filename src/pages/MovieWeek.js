@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { DateTime } from "luxon";
 
@@ -7,8 +7,8 @@ import MovieCards from "../components/MovieCards";
 import ErrorInfo from "../components/ErrorInfo";
 import MainLayout from "../components/MainLayout";
 
-import { getTMDBData } from "../utils/tmdb_api";
-import { getPreviousWednesday, getNextTuesday, getPreviousWeek, getNextWeek } from "../utils/date_utils";
+import { getMRBackData } from "../utils/helper_api";
+import { getPreviousWednesday, getNextTuesday } from "../utils/date_utils";
 import PrevNextLinks from "../components/PrevNextLinks";
 
 function MovieWeek() {
@@ -42,12 +42,11 @@ function MovieWeek() {
             const lteDate = getNextTuesday(weekDay);
 
             const customQueryParams = {
-                "release_date.gte": gteDate,
-                "release_date.lte": lteDate,
-                "with_release_type": "3"
+                "release_date_gte": gteDate,
+                "release_date_lte": lteDate
             };
 
-            getTMDBData("/discover/movie", customQueryParams, setMovies, setError, setErrorInfo);
+            getMRBackData("/weekly_movies", customQueryParams, setMovies, setError, setErrorInfo);
         }
     }, [weekDay]);
 
@@ -56,11 +55,10 @@ function MovieWeek() {
             const gteDate = weekDay;
             const lteDate = getNextTuesday(weekDay);
             const customQueryParams = {
-                "release_date.gte": gteDate,
-                "release_date.lte": lteDate,
-                "with_release_type": "3"
+                "release_date_gte": gteDate,
+                "release_date_lte": lteDate
             };
-            getTMDBData("/discover/movie", customQueryParams, setMovies, setError, setErrorInfo, movies.page);
+            getMRBackData("/weekly_movies", customQueryParams, setMovies, setError, setErrorInfo, movies.page);
         }
     }
 

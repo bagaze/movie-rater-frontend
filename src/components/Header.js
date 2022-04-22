@@ -26,6 +26,12 @@ function Header() {
                 <StyledHeaderLink to="movie-search">
                 Search movies
                 </StyledHeaderLink>
+                <StyledHeaderLink to="signup">
+                Sign up
+                </StyledHeaderLink>
+                <StyledHeaderLink to="login">
+                Log in
+                </StyledHeaderLink>
             </nav>
         </header>
     );

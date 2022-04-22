@@ -8,7 +8,7 @@ function MovieSearchForm({ value, onSubmit, onChange, onClear }) {
         <form id="search_form" onSubmit={onSubmit}>
             <input
                 id="form_field"
-                className="form__field"
+                className="search_form__field"
                 placeholder="Movie title"
                 type="text"
                 value={value}

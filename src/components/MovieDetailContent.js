@@ -1,6 +1,6 @@
 import MoviePoster from "./MoviePoster";
 
-function MovieDetailContent({movie, directors, releaseDateFR}) {
+function MovieDetailContent({movie}) {
     const TMDB_POSTER_SIZE = process.env.REACT_APP_TMDB_POSTER_SIZE_LARGE;
 
     return (
@@ -12,8 +12,11 @@ function MovieDetailContent({movie, directors, releaseDateFR}) {
             /><br />
             <span><span style={{"font-weight": "bold"}}> ID:</span> {movie.id}</span><br />
             <span><span style={{"font-weight": "bold"}}>Title:</span> {movie.title}</span><br />
-            <span><span style={{"font-weight": "bold"}}>Director(s):</span> {directors.join(', ') || "TBD"}</span><br />
-            <span><span style={{"font-weight": "bold"}}>Release date:</span> {releaseDateFR || "TDB"}</span>
+            <span><span style={{"font-weight": "bold"}}>Original title:</span> {movie.original_title}</span><br />
+            <span><span style={{"font-weight": "bold"}}>Director(s):</span> {movie.directors.join(', ') || "TBD"}</span><br />
+            <span>
+                <span style={{"font-weight": "bold"}}>Release date:</span> {(movie.theatrical_release_date && new Date(movie.theatrical_release_date).toDateString()) || "TDB"}
+            </span>
         </div>
     );
 }

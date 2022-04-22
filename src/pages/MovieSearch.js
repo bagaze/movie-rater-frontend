@@ -5,7 +5,7 @@ import MovieCards from "../components/MovieCards";
 import MovieSearchForm from "../components/MovieSearchForm";
 import MainLayout from "../components/MainLayout";
 import { useStateWithSessionStorage } from "../utils/hooks";
-import { getTMDBData } from "../utils/tmdb_api";
+import { getMRBackData } from "../utils/helper_api";
 
 function MovieSearch() {
     const pageTitle = "Search movies";
@@ -45,8 +45,8 @@ function MovieSearch() {
                 query: searchField
             };
 
-            getTMDBData(
-                "/search/movie",
+            getMRBackData(
+                "/movies",
                 customQueryParams,
                 setMovies,
                 setError,
@@ -56,11 +56,10 @@ function MovieSearch() {
     }
 
     const handleLoadMore = () => {
-        console.log('handleLoadMore');
         const customQueryParams = {
             query: lastSearchedField
         };
-        getTMDBData("/search/movie", customQueryParams, setMovies, setError, setErrorInfo, movies.page);
+        getMRBackData("/movies", customQueryParams, setMovies, setError, setErrorInfo, movies.page);
     }
 
     if (!lastSearchedField) {
@@ -103,9 +102,6 @@ function MovieSearch() {
             </MainLayout>
         )
     }
-
-    console.log(movies);
-    console.log(movies.results && movies.results.length < movies.total_results);
 
     return (
         <MainLayout pageTitle={pageTitle}>

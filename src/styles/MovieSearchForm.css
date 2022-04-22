@@ -5,10 +5,10 @@ form {
     position: relative;
 }
 
-.form__field {
+.search_form__field {
     font-family: inherit;
     width: 100%;
-    border: 3px solid darkslategray;
+    border: 1px solid darkslategray;
     box-shadow: 4px 2px 2px rgba(1, 1, 1, 0.250);
     border-radius: 20px;
     outline: 0;
@@ -19,15 +19,15 @@ form {
     transition: border-color 0.2s;
 }
 
-.form__field::placeholder {
+.search_form__field::placeholder {
     color: grey;
 }
 
-.form__field:hover {
+.search_form__field:hover {
     box-shadow: 4px 2px 2px rgba(1, 1, 1, 0.500);
 }
 
-.form__field:focus {
+.search_form__field:focus {
     box-shadow: 4px 2px 2px rgba(1, 1, 1, 0.500);
 }
 
@@ -37,7 +37,7 @@ form {
     margin: 0px;
     padding: 0px;
     right: -25px;
-    top: 8px;
+    top: 5px;
     height: 30px;
     width: 30px;
     z-index: 2;
