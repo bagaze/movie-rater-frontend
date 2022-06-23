@@ -111,7 +111,7 @@ function MovieSearch() {
                 onChange={handleChange}
                 onClear={handleClear}
             />
-            {movies && <MovieCards movies={movies.results} />}
+            {movies.results && <MovieCards movies={movies.results} />}
             {movies.results && movies.results.length < movies.total_results && (
                 <div>
                     <button type="button" onClick={handleLoadMore}>Load more results</button>

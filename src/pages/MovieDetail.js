@@ -30,6 +30,10 @@ function MovieDetail() {
         );
     }, [tmdbid]);
 
+    const handleOnClick = (i) => {
+        setUserRating(i);
+    };
+
     if (movie) {
         ratingTMDB = Math.round(movie.vote_average / 2); 
     }
@@ -68,6 +72,7 @@ function MovieDetail() {
                         title="User rating"
                         rating={userRating}
                         isClickable={true}
+                        onClick={handleOnClick}
                     />
                 </div>
             ) }

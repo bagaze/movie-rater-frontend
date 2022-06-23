@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
-function Rating({title, rating, isClickable=false}) {
+function Rating({title, rating, isClickable=false, onClick=null}) {
     const [ hoveredStar, setHoveredStar ] = useState(0);
     const [ userSelectedRating, setUserSelectedRating ] = useState(0);
     const maxRating = 5;
@@ -16,6 +16,9 @@ function Rating({title, rating, isClickable=false}) {
     const handleClick = ( (i) => {
         if (isClickable) {
             setUserSelectedRating(i);
+        }
+        if (onClick) {
+            onClick(i);
         }
     } );
 
@@ -32,6 +35,7 @@ function Rating({title, rating, isClickable=false}) {
         if (i <= rating_) {
             ratingStars.push(
                 <FontAwesomeIcon 
+                    key={i}
                     onClick={ () => handleClick(i) }
                     onMouseOver={ () => handleMouseOver(i) }
                     onMouseLeave={ () => setHoveredStar(0) }
@@ -42,6 +46,7 @@ function Rating({title, rating, isClickable=false}) {
         } else {
             ratingStars.push(
                 <FontAwesomeIcon
+                    key={i}
                     onClick={ () => handleClick(i) }
                     onMouseOver={ () => handleMouseOver(i) }
                     onMouseLeave={ () => setHoveredStar(0) }

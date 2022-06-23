@@ -10,12 +10,12 @@ function MovieDetailContent({movie}) {
                 size={TMDB_POSTER_SIZE}
                 movie_title={movie.title}
             /><br />
-            <span><span style={{"font-weight": "bold"}}> ID:</span> {movie.id}</span><br />
-            <span><span style={{"font-weight": "bold"}}>Title:</span> {movie.title}</span><br />
-            <span><span style={{"font-weight": "bold"}}>Original title:</span> {movie.original_title}</span><br />
-            <span><span style={{"font-weight": "bold"}}>Director(s):</span> {movie.directors.join(', ') || "TBD"}</span><br />
+            <span><span style={{fontWeight: "bold"}}>ID:</span> {movie.id}</span><br />
+            <span><span style={{fontWeight: "bold"}}>Title:</span> {movie.title}</span><br />
+            <span><span style={{fontWeight: "bold"}}>Original title:</span> {movie.original_title}</span><br />
+            <span><span style={{fontWeight: "bold"}}>Director(s):</span> {movie.directors.join(', ') || "TBD"}</span><br />
             <span>
-                <span style={{"font-weight": "bold"}}>Release date:</span> {(movie.theatrical_release_date && new Date(movie.theatrical_release_date).toDateString()) || "TDB"}
+                <span style={{fontWeight: "bold"}}>Release date:</span> {(movie.theatrical_release_date && new Date(movie.theatrical_release_date).toDateString()) || "TDB"}
             </span>
         </div>
     );
