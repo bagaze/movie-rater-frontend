@@ -10,7 +10,7 @@ function LogOut() {
             loggedIn: false,
             userInfos: {
                 username: '',
-                access_token: ''}
+                accessToken: ''}
         });
     });
 

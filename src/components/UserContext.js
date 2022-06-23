@@ -14,7 +14,7 @@ export const UserProvider = (props) => {
             loggedIn: false,
             userInfos: {
                 username: '',
-                access_token: ''
+                accessToken: ''
             }
         }
     );
@@ -23,7 +23,7 @@ export const UserProvider = (props) => {
     useEffect( () => {
         if (user.loggedIn === true) {
             const fetchUser = async () => {
-                await getMeMRBack(user.userInfos.access_token, setError, setErrorInfo);
+                await getMeMRBack(user.userInfos.accessToken, setError, setErrorInfo);
             }
             fetchUser();
         }
@@ -37,7 +37,7 @@ export const UserProvider = (props) => {
                 loggedIn: false,
                 userInfos: {
                     username: '',
-                    access_token: ''
+                    accessToken: ''
                 }
             });
         }

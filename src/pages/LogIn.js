@@ -30,7 +30,7 @@ function LogIn() {
                 loggedIn: true,
                 userInfos: {
                     username: user.username,
-                    access_token: token.access_token
+                    accessToken: token.access_token
                 }
             })
         }
