@@ -1,51 +1,52 @@
 import { useState, useEffect } from "react";
-import validator from "validator";
 
 import "../styles/LogInForm.css"
 
 
 function LogInForm({ onSubmit }) {
-    const [ email, setEmail ] = useState("");
+    const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ disabled, setDisabled ] = useState(true);
 
     useEffect( () => {
-        let emailOk = false;
+        let usernameOk = false;
         let passwordOk = false;
 
-        if (validator.isEmail(email)) {
-            emailOk = true;
+        const reUsername = /^[a-zA-Z0-9_-]{3,50}$/
+        if (username.match(reUsername)) {
+            usernameOk = true;
         }
 
-        if (password.length > 5) {
+        if (password.length >= 5) {
             passwordOk = true;
         }
 
-        if (emailOk && passwordOk) {
+        if (usernameOk && passwordOk) {
             setDisabled(false);
         } else {
             setDisabled(true)
         }
-    }, [email, password])
+    }, [username, password])
 
     return (
         <form id="login_form" className="login_form__form" onSubmit={onSubmit}>
-            <label for="email">Email</label>
+            <label htmlFor="username">Username</label>
             <input
-                id="email"
+                id="username"
                 className="login_form__field"
-                placeholder="Email"
+                placeholder="Username"
                 type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
             />
 
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
                 id="password"
                 className="login_form__field"
                 placeholder="Password"
                 type="password"
+                autoComplete="on"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />

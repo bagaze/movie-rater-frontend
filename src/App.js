@@ -1,5 +1,4 @@
 import './App.css';
-import { createContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,6 +8,7 @@ import MovieWeek from './pages/MovieWeek';
 import MovieDetail from './pages/MovieDetail';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import LogOut from './pages/LogOut';
 import { Error404 } from './pages/Error';
 import { UserProvider } from './components/UserContext';
 
@@ -24,6 +24,7 @@ function App() {
             <Route path="/movie/:tmdbid" element={<MovieDetail />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<LogIn />} />
+            <Route path="/logout" element={<LogOut />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
         <Footer />

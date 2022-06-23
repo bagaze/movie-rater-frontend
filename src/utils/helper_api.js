@@ -111,7 +111,7 @@ export async function signUpMRBack(newUser, setError, setErrorInfo) {
     let createdUser = null;
 
     try {
-        const { status, statusText, data } = await axios.post(
+        const { status, data } = await axios.post(
             `${MRBACK_API_URL}/users`,
             newUser,
             {
@@ -133,4 +133,70 @@ export async function signUpMRBack(newUser, setError, setErrorInfo) {
     }
     
     return createdUser;
+}
+
+export async function getMeMRBack(access_token, setError, setErrorInfo) {
+    const MRBACK_API_URL = process.env.REACT_APP_MRBACK_API_URL;
+    let user = null;
+
+    try {
+        const headers = { Authorization: `Bearer ${access_token}` }
+        const { status, data } = await axios({
+            method: 'get',
+            url: `${MRBACK_API_URL}/users/me`,
+            validateStatus: _axiosValidateStatus,
+            headers
+        });
+        if (status === 200) {
+            user = data;
+        } else {
+            setError(true);
+            setErrorInfo(data.detail);
+        }
+    } catch(e) {
+        console.log("Error catched");
+        console.log(e);
+        setError(true);
+        setErrorInfo(e);
+    }
+
+    return user
+}
+
+export async function loginMRBack(userConnecting, setError, setErrorInfo) {
+    const MRBACK_API_URL = process.env.REACT_APP_MRBACK_API_URL;
+
+    let token = null;
+    let user = null;
+
+    try {
+        const headers = { 'Content-Type': "multipart/form-data" };
+        const formData = new FormData();
+        formData.append('username', userConnecting.username)
+        formData.append('password', userConnecting.password)
+        const { status, data } = await axios({
+            method: 'post',
+            url: `${MRBACK_API_URL}/tokens`,
+            data: formData,
+            validateStatus: _axiosValidateStatus,
+            headers,
+        });
+        if (status === 201) {
+            token = data;
+        } else {
+            setError(true);
+            setErrorInfo(data.detail);
+        }
+    } catch(e) {
+        console.log("Error catched");
+        console.log(e);
+        setError(true);
+        setErrorInfo(e);
+    }
+
+    if (token) {
+        user = await getMeMRBack(token.access_token, setError, setErrorInfo);
+    }
+
+    return {user, token};
 }

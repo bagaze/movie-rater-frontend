@@ -1,17 +1,15 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 import MainLayout from "../components/MainLayout";
 import SignUpForm from "../components/SignUpForm";
-import { UserContext } from "../components/UserContext";
 import { signUpMRBack } from "../utils/helper_api";
 import FormError from "../components/FormError";
 import FormSuccess from "../components/FormSuccess";
 
 function SignUp() {
     const pageTitle = "Sign up";
-    const [ user, setUser ] = useContext(UserContext);
-    const [ createdUser, setUserCreated ] = useState('');
+    const [ userCreated, setUserCreated ] = useState('');
     const [ error, setError ] = useState(false);
     const [ errorInfo, setErrorInfo ] = useState('');
 
@@ -32,13 +30,13 @@ function SignUp() {
         }
     };
 
-    if (createdUser) {
+    if (userCreated) {
         return <Navigate replace to="/login" />
     }
 
     return (
         <MainLayout pageTitle={pageTitle}>
-            { createdUser && (<FormSuccess successInfo={`User (${createdUser}) successfully created`} />) }
+            { userCreated && (<FormSuccess successInfo={`User (${userCreated}) successfully created`} />) }
             { error && (<FormError action={'creating new user'} errorInfo={errorInfo} />) }
             <SignUpForm onSubmit={handleOnSubmit} />
         </MainLayout>

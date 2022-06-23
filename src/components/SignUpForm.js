@@ -37,7 +37,7 @@ function SignUpForm({ onSubmit }) {
 
     return (
         <form id="signup_form" className="signup_form__form" onSubmit={onSubmit}>
-            <label for="username">Username</label>
+            <label htmlFor="username">Username</label>
             <input
                 id="username"
                 className="signup_form__field"
@@ -47,7 +47,7 @@ function SignUpForm({ onSubmit }) {
                 onChange={(e) => setUsername(e.target.value)}
             />
 
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input
                 id="email"
                 className="signup_form__field"
@@ -57,12 +57,13 @@ function SignUpForm({ onSubmit }) {
                 onChange={(e) => setEmail(e.target.value)}
             />
 
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
                 id="password"
                 className="signup_form__field"
                 placeholder="Password (Minimum length: 5 characters)"
                 type="password"
+                autoComplete="on"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
