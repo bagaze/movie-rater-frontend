@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactLoading from 'react-loading';
 
 import ErrorInfo from "../components/ErrorInfo";
 import MovieCards from "../components/MovieCards";
@@ -20,8 +21,9 @@ function MovieSearch() {
     );
     const [ movies, setMovies ] = useStateWithSessionStorage(
         "moviesearch__movies",
-        []
+        null
     );
+    const [ moviesLoading, setMoviesLoading ] = useState(false);
     const [ error, setError ] = useState(false);
     const [ errorInfo, setErrorInfo ] = useState("");
 
@@ -30,14 +32,16 @@ function MovieSearch() {
     };
 
     const handleClear = (e) => {
-        setMovies([]);
+        setMovies(null);
+        setMoviesLoading(false);
         setSearchField('');
         setLastSearchedField('');
     }
 
-    const handleOnSubmit = (e) => {
+    const handleOnSubmit = async (e) => {
         e.preventDefault();
-        setMovies([]);
+        setMovies(null);
+        setMoviesLoading(true);
 
         setLastSearchedField(e.target.form_field.value);
         if (searchField) {
@@ -45,13 +49,14 @@ function MovieSearch() {
                 query: searchField
             };
 
-            getMRBackData(
+            await getMRBackData(
                 "/movies",
                 customQueryParams,
                 setMovies,
                 setError,
                 setErrorInfo
             );
+            setMoviesLoading(false);
         }
     }
 
@@ -72,7 +77,7 @@ function MovieSearch() {
                     onClear={handleClear}
                 />
             </MainLayout>
-        )
+        );
     }
 
     if (error) {
@@ -86,7 +91,21 @@ function MovieSearch() {
                 />
                 <ErrorInfo errorInfo={errorInfo} />
             </MainLayout>
-        )
+        );
+    }
+
+    if (moviesLoading) {
+        return (
+            <MainLayout pageTitle={pageTitle}>
+                <MovieSearchForm
+                    value={searchField}
+                    onSubmit={handleOnSubmit}
+                    onChange={handleChange}
+                    onClear={handleClear}
+                />
+                <ReactLoading type='bars' color='rgb(235,179,189)' height={50} width={50} />
+            </MainLayout>
+        );
     }
 
     if (movies && movies.total_results === 0) {
@@ -100,7 +119,7 @@ function MovieSearch() {
                 />
                 <p>No movies found for title={lastSearchedField}</p>
             </MainLayout>
-        )
+        );
     }
 
     return (
@@ -118,7 +137,7 @@ function MovieSearch() {
                 </div>
             )}
         </MainLayout>
-    )
+    );
 }
 
 export default MovieSearch;

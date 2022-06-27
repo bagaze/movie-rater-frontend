@@ -8554,6 +8554,7 @@ __metadata:
     prop-types: ^15.8.1
     react: ^18.0.0
     react-dom: ^18.0.0
+    react-loading: ^2.0.3
     react-router-dom: 6
     react-scripts: 5.0.1
     validator: ^13.7.0
@@ -10305,6 +10306,16 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: e72d0ba81b5922759e4aff17e0252bd29988f9642ed817f56b25a3e217e13eea8a7f2322af99a06edb779da12d5d636e9fda473d620df9a3da0df2a74141d53e
+  languageName: node
+  linkType: hard
+
+"react-loading@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "react-loading@npm:2.0.3"
+  peerDependencies:
+    prop-types: ^15.6.0
+    react: ">=0.14.0"
+  checksum: a2b24b94c1988c1418a3d714c5d95dd13407f43e6ac59f350ae54ad75dd613bfea0abb59c8530900821806b72596e57555a700f9541bd12d9ac88387cce919fa
   languageName: node
   linkType: hard
 

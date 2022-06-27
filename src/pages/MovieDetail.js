@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import ReactLoading from 'react-loading';
 import { UserContext } from "../components/UserContext";
 import { useParams } from "react-router-dom";
 import ErrorInfo from "../components/ErrorInfo";
@@ -73,7 +74,7 @@ function MovieDetail() {
     if (!movie && !error) {
         return (
             <MainLayout pageTitle={pageTitle}>
-                <p>Loading...</p>
+                <ReactLoading type='bars' color='rgb(235,179,189)' height={50} width={50} />
             </MainLayout>
         );
     }

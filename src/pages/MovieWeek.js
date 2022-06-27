@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import ReactLoading from 'react-loading';
+
 import { DateTime } from "luxon";
 
 import MovieCards from "../components/MovieCards";
@@ -14,7 +16,7 @@ import PrevNextLinks from "../components/PrevNextLinks";
 function MovieWeek() {
     const pageTitle = "Movies by weeks";
 
-    const [ movies, setMovies ] = useState([]);
+    const [ movies, setMovies ] = useState(null);
     const [ error, setError ] = useState(false);
     const [ errorInfo, setErrorInfo ] = useState("");
     const [ weekDay, setWeekDay ] = useState("");
@@ -30,6 +32,7 @@ function MovieWeek() {
                 week: previousWednesday
             });
             setWeekDay(previousWednesday);
+            setMovies(null);
         } else {
             setSearchParams({});
             setWeekDay(getPreviousWednesday(DateTime.now().toISODate()));
@@ -73,9 +76,13 @@ function MovieWeek() {
     if (!movies) {
         return (
             <MainLayout pageTitle={pageTitle}>
-                <p>Loading...</p>
+                {weekDay && (
+                    <PrevNextLinks weekDay={weekDay} />
+                )}
+                {weekDay && <h2>{`Week of ${weekDay}`}</h2>}
+                <ReactLoading type='bars' color='rgb(235,179,189)' height={50} width={50} />
             </MainLayout>
-        )
+        );
     }
 
     return (
